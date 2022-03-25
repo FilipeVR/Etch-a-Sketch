@@ -1,4 +1,4 @@
-const bd = document.body;
+const ct = document.querySelector('.container');
 
 for(let i = 0; i<16; i++) {
     let row = document.createElement('div');
@@ -8,10 +8,16 @@ for(let i = 0; i<16; i++) {
         let pxsqr = document.createElement('div');
         pxsqr.id = `gridPixel_${(i*16)+j}`;
         pxsqr.className = "gridPixel";
-        pxsqr.innerText = `gridPixel_${(i*16)+j}`;
         row.appendChild(pxsqr);
     }
-    bd.appendChild(row);
+    ct.appendChild(row);
 }
-let res = bd.innerHTML
-console.log()
+
+const gdpx = document.querySelectorAll('.gridPixel')
+
+console.log(gdpx);
+
+Array.from(gdpx).forEach((gd) => {
+    gd.addEventListener('mouseover', function(e) {
+    e.target.style.background = 'coral'
+})})
