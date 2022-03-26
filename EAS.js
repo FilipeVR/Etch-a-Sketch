@@ -15,9 +15,34 @@ for(let i = 0; i<16; i++) {
 
 const gdpx = document.querySelectorAll('.gridPixel')
 
-console.log(gdpx);
+let mouseDown = false;//used in the 'click+drag' paint feature
 
 Array.from(gdpx).forEach((gd) => {
-    gd.addEventListener('mouseover', function(e) {
-    e.target.style.background = 'coral'
-})})
+
+    //******** Paint the grid only on 'click+drag' event ********/
+
+    /*Listen to 'mousedown' event and update mouseDown variable*/
+    gd.addEventListener('mousedown', function(ev) {
+        ev.preventDefault();
+        mouseDown = true;
+    },false);
+
+    /*Listen to 'mousemove' event and apply dragPaint()*/
+    gd.addEventListener('mousemove', function(ev) {
+        if (!mouseDown) {return} //check if the button is currently pressed to proceed with the execution.
+        ev.preventDefault();
+        dragPaint(ev);
+    }, false);
+
+    /*Listen to 'mouseup' event and update mouseDown variable*/
+    gd.addEventListener('mouseup', function(ev) {
+        ev.preventDefault();
+        mouseDown = false;
+    }, false)
+
+    function dragPaint(ev) {
+        ev.target.style.background = 'coral';
+    }
+    
+    //******** Paint the grid only on 'click+drag' event ********/
+})
