@@ -15,11 +15,15 @@ function grid(size) {
     }
 }
 
-grid(100);
+let res = 100;
+
+grid(res);//Default grid
 
 const gdpx = document.querySelectorAll('.gridPixel')
 
 let mouseDown = false;//used in the 'click+drag' paint feature
+
+let clr = 'coral';//Default color
 
 Array.from(gdpx).forEach((px) => {
 
@@ -45,7 +49,7 @@ Array.from(gdpx).forEach((px) => {
     }, false)
 
     function dragPaint(ev) {
-        ev.target.style.background = 'coral';
+        ev.target.style.background = clr;
     }
     
     //******** Paint the grid only on 'click+drag' event ********/
@@ -61,4 +65,16 @@ clearGrid.addEventListener('click', () => {
     Array.from(gdpx).forEach((px) => {
         px.setAttribute('style','background: white;');
     })
+})
+
+const inkColor = document.getElementById('inkColor');
+const resolution = document.getElementById('resolution');
+
+inkColor.addEventListener('change', () => {
+    clr = inkColor.value
+})
+
+resolution.addEventListener('change', () => {
+    res = resolution.value
+    //a = grid(res);
 })
